@@ -17,7 +17,7 @@ module bcd_register (
 reg [3:0] data_reg = 0;
 
 // output a '1' on overflow if we are going to overflow next clock cycle
-assign overflow = data_reg == 4'h9;
+assign overflow = data_reg >= 4'h9;
 
 // outputs always connect to the data register
 assign data_out = data_reg;
@@ -27,7 +27,7 @@ begin
     if (en) begin
         if(load) begin
             data_reg <= data_in;
-            $display("loading data_in: %d", data_in);
+            //$display("loading data_in: %d", data_in);
         end
         else begin
             // reset to 0 if an overflow event is going to happen

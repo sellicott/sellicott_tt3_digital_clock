@@ -45,7 +45,7 @@ end
 
 initial begin
     // dump stuff to a vcd file
-    $dumpfile("bcd_register_tb.vcd");
+    $dumpfile("minutes_seconds_register_tb.vcd");
     $dumpvars(0, minutes_seconds_register_tb);
 
     $monitor("time, minutes.seconds %d, %d%d.%d%d", $time, msd_minutes,lsd_minutes, msd_seconds,lsd_seconds);
