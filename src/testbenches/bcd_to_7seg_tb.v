@@ -4,7 +4,7 @@
  */
 
 `define default_netname none
-`timescale 1ns/10ps
+`timescale 1ns/100ps
 
 module bcd_to_7seg_tb;
 
