@@ -4,7 +4,6 @@
  * date: 03-17-23
  */
 
-
 module minutes_seconds_register (
     input wire en,
     input wire clk,

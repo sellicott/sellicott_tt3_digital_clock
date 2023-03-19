@@ -48,7 +48,7 @@ initial begin
     $dumpfile("minutes_seconds_register_tb.vcd");
     $dumpvars(0, minutes_seconds_register_tb);
 
-    $monitor("time, minutes.seconds %d, %d%d.%d%d", $time, msd_minutes,lsd_minutes, msd_seconds,lsd_seconds);
+    $monitor("time, minutes.seconds %d, %d%d.%d%d", $time, msd_minutes, lsd_minutes, msd_seconds, lsd_seconds);
 
     $display("Data hold Test");
     enable = 0;
