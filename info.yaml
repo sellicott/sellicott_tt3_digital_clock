@@ -5,7 +5,7 @@ project:
 
 # If using an HDL, set wokwi_id as 0 and uncomment and list your source files here. 
 # Source files must be in ./src and you must list each source file separately
-source_files:        
+  source_files:        
    - sellicott_digital_clock.v 
    - design_wrapper_v1.v
    - time_register.v
@@ -17,7 +17,7 @@ source_files:
    - shift_register_controller.v
    - bcd_segment_mux.v
    - bcd_to_7seg.v
-top_module: "sellicott_digital_clock"
+  top_module: "sellicott_digital_clock"
 
 # Keep a track of the submission yaml
 yaml_version: 3.0
