@@ -17,7 +17,7 @@ module digit_shift_register (
 
 reg [7:0] shift_reg = 0;
 
-assign serial_out = shift_reg[0];
+assign serial_out = shift_reg[0] && en;
 
 always @(posedge clk)
 begin

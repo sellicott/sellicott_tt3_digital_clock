@@ -1,5 +1,5 @@
-/* digit_shift_register: module to take a 7-segment digit in, in parallel, then shift it out over
- * a serial connection.
+/* shift_register_controller: module to generate clock and control signals for the shift register to
+ * output digit segments over a serial connection and load them into a set of external shift registers.
  * author: Samuel Ellicott
  * date: 03-19-23
  */
@@ -20,7 +20,7 @@ reg digit_clk = 0;
 reg [2:0] digit_count = 0;
 reg [3:0] sr_count = 0;
 
-assign bcd_select = sr_count;
+assign bcd_select = digit_count;
 
 // load data on the first clock
 assign sr_load = sr_count == 4'h0;
