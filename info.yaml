@@ -5,7 +5,7 @@ project:
 
 # If using an HDL, set wokwi_id as 0 and uncomment and list your source files here. 
 # Source files must be in ./src and you must list each source file separately
- source_files:        
+source_files:        
    - sellicott_digital_clock.v 
    - design_wrapper_v1.v
    - time_register.v
@@ -17,7 +17,7 @@ project:
    - shift_register_controller.v
    - bcd_segment_mux.v
    - bcd_to_7seg.v
- top_module: "sellicott_digital_clock"
+top_module: "sellicott_digital_clock"
 
 # Keep a track of the submission yaml
 yaml_version: 3.0
@@ -73,6 +73,6 @@ documentation:
   tag:          "clock, bcd, shift-register, 7-segment-display"      # comma separated list of tags: test encryption, experiment, clock, animation, utility, industrial, pwm, fpga, alu, microprocessor, risc, riscv, sensor, signal generator, fft, filter, music, bcd, sound, serial, timer, random number generator, calculator, decoder, counter, puzzle, multiplier, game, oscillator,
   external_hw:  "Requires 6 74xx596(?) shift registers to output data to a set of 7-segment displays"      # Describe any external hardware needed
   discord:      "sellicott#9284"      # Your discord handle, used for communication and automatically assigning tapeout role after a submission
-  doc_link:     ""      # URL to longer form documentation, eg the README.md in your repository
+  doc_link:     "https://github.com/sellicott/sellicott_tt3_digital_clock"      # URL to longer form documentation, eg the README.md in your repository
   clock_hz:     12500   # Clock frequency in Hz (if required)
   picture:      ""      # relative path to a picture in your repository
