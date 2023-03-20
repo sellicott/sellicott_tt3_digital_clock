@@ -26,8 +26,8 @@ initial begin
     $dumpfile("clock_divider_tb.vcd");
     $dumpvars(0, clock_divider_tb);
 
-    repeat (4) begin
-        repeat (25) begin
+    repeat (8) begin
+        repeat (50) begin
             repeat (125) begin
                 @(negedge clk);
             end
