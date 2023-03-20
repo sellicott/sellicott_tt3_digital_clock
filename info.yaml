@@ -8,6 +8,7 @@ project:
   source_files:        
    - sellicott_digital_clock.v 
    - design_wrapper_v1.v
+   - clock_divider.v
    - time_register.v
    - hours_register2.v
    - minutes_seconds_register.v
