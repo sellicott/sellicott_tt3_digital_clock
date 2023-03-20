@@ -14,12 +14,12 @@ module design_wrapper_v1 (
     input wire set_hours,
     input wire set_minutes,
 
+    output wire pm,
     output wire serial_out,
     output wire latch_out,
     output wire clk_out
 );
 
-wire pm;
 wire [3:0] hours_msd;
 wire [3:0] hours_lsd;
 wire [3:0] minutes_msd;
