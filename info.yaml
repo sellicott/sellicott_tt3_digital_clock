@@ -51,10 +51,10 @@ documentation:
 # A description of what the inputs do
   inputs:               
     - clock (12.5Khz)
-    - 12h / 24h 
-    - `set_fast` 1Hz/5Hz 
-    - `set_hours` 
-    - `set_minutes` 
+    - 12h / 24h
+    - set_fast 1Hz/5Hz
+    - set_hours
+    - set_minutes
     - none
     - none
     - none
