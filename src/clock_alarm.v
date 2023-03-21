@@ -79,52 +79,73 @@ wire seconds_overflow = seconds_reg == 6'd59;
 reg running = 0;
 assign alarm = running;
 
-always @(posedge reset)
+// block for the seconds register
+always @(posedge clk_1hz, posedge reset, posedge start)
 begin
-    running <= 1'h0;
-    seconds_reg <= 6'h0;
-    minutes_reg <= 2'h0; 
-end
-
-always @(posedge start)
-begin
-    if(en)
+    if(reset)
     begin
-        running <= 1'h1;
         seconds_reg <= 6'h0;
-        minutes_reg <= 3'h5; 
     end
-end
-
-always @(posedge clk_1hz)
-begin
-    if (en && running)
+    else if(en && running)
     begin
         if (seconds_reg >= 59 )
             seconds_reg <= 6'h0;
         else
             seconds_reg <= seconds_reg + 1'h1;
     end
+    else if(en && start)
+    begin
+        seconds_reg <= 6'h0;
+    end
     else
     begin
         seconds_reg <= 6'h0;
-        minutes_reg <= 3'h0;;
-        running <= 1'h0;
     end
 end
 
-always @(posedge seconds_overflow)
+// block for the minutes register
+always @(posedge seconds_overflow, posedge reset, posedge start)
 begin
-    if(en && running)
+    if(reset)
+    begin
+        minutes_reg <= 3'h0; 
+    end
+    else if(en && running)
     begin
         if (minutes_reg > 3'h0)
-        begin
             minutes_reg <= minutes_reg - 1'h1;
-        end
         else
-        begin
+            minutes_reg <= 3'h0;
+    end
+    else if(en && start)
+    begin
+        minutes_reg <= 3'h5; 
+    end
+    else
+    begin
+        minutes_reg <= 3'h0;
+    end
+end
+
+// block for the running register
+always @(posedge seconds_overflow, posedge reset, posedge start)
+begin
+    if (reset)
+    begin
+        running <= 1'h0;
+    end
+    else if(en && running && seconds_overflow)
+    begin
+        if(minutes_reg == 0)
             running <= 1'h0;
-        end
+    end
+    else if(en && start)
+    begin
+        running <= 1'h1;
+    end
+    else
+    begin
+        running <= 1'h0;
     end
 end
 
