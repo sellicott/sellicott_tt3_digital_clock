@@ -22,19 +22,19 @@ module design_wrapper_v2 (
     output wire serial_out,
     output wire latch_out,
     output wire clk_out,
-    output wire pm,
+    output reg  pm,
     output wire set_alarm_out,
     output wire alarm_en_out,
     output wire alarm_beep_out
 );
 
 // display wires that go to the output wrapper module
-wire [3:0] hours_msd;
-wire [3:0] hours_lsd;
-wire [3:0] minutes_msd;
-wire [3:0] minutes_lsd;
-wire [3:0] seconds_msd;
-wire [3:0] seconds_lsd;
+reg [3:0] hours_msd;
+reg [3:0] hours_lsd;
+reg [3:0] minutes_msd;
+reg [3:0] minutes_lsd;
+reg [3:0] seconds_msd;
+reg [3:0] seconds_lsd;
 
 wire clock_pm;
 wire [3:0] clock_hours_msd;
@@ -53,21 +53,38 @@ wire [3:0] alarm_minutes_lsd;
 wire [3:0] alarm_seconds_msd;
 wire [3:0] alarm_seconds_lsd;
 
-// select between displaying the alarm register and the clock register
-assign pm = set_alarm ? alarm_pm : clock_pm;
-assign hours_msd = set_alarm ? alarm_hours_msd : clock_hours_msd;
-assign hours_lsd = set_alarm ? alarm_hours_lsd : clock_hours_lsd;
-assign minutes_msd = set_alarm ? alarm_minutes_msd: clock_minutes_msd;
-assign minutes_lsd = set_alarm ? alarm_minutes_lsd: clock_minutes_lsd;
-// don't care about seconds when setting the alarm
-assign seconds_msd = set_alarm ? 4'h0 : clock_seconds_msd;
-assign seconds_lsd = set_alarm ? 4'h0 : clock_seconds_lsd;
+always @*
+begin
+    if (set_alarm)
+    begin
+        pm <= alarm_pm;
+        hours_msd <= alarm_hours_msd;
+        hours_lsd <= alarm_hours_lsd;
+        minutes_msd <= alarm_minutes_msd;
+        minutes_lsd <= alarm_minutes_lsd;
+        seconds_msd <= 4'h0;
+        seconds_lsd <= 4'h0;
+    end
+    else
+    begin
+        pm <= clock_pm;
+        hours_msd <= clock_hours_msd;
+        hours_lsd <= clock_hours_lsd;
+        minutes_msd <= clock_minutes_msd;
+        minutes_lsd <= clock_minutes_lsd;
+        seconds_msd <= clock_seconds_msd;
+        seconds_lsd <= clock_seconds_lsd;
+    end
+end
 
 // select between setting the alarm or setting the clock
 wire alarm_set_hours   = set_alarm ? set_hours   : 1'h0;
 wire alarm_set_minutes = set_alarm ? set_minutes : 1'h0;
 wire clock_set_hours   = set_alarm ? 1'h0 : set_hours;
 wire clock_set_minutes = set_alarm ? 1'h0 : set_minutes;
+
+assign set_alarm_out = set_alarm;
+assign alarm_en_out  = alarm_en;
 
 wire clk_sr;
 wire clk_set;

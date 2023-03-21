@@ -58,6 +58,7 @@ alarm_countdown timer(
     .en(en),
     .start(alarm_trigger),
     .reset(alarm_reset),
+    .clk_1hz(clk_1hz),
     .alarm(alarm_on)
 );
 
